@@ -1,0 +1,66 @@
+    $(function() {
+
+    
+    // select size input
+
+        height = $('#inputHeight');
+        width = $('#inputWeight');
+
+    // select color input
+
+        color = $('#colorPicker');
+
+
+     // select canvas
+
+        const table = $('#pixelCanvas');
+
+     // grid generation based on user input
+
+        function makeGrid() {
+            table.find('tbody').remove();
+
+            Rows = height.val();
+            Cols = width.val();
+
+            table.append('<tbody></tbody>');
+
+            tBody = table.find('tbody');
+
+            for(i = 0; i < Rows; i++) {
+                tBody.append('<tr></tr>');
+            }
+
+            for(j = 0; j < Cols; j++) {
+                table.find('tr').append('<td class="colour"></td>');
+            }
+        }
+
+        $(document).ready(function () {
+            $('input[type="submit"]').on('click', function (a) {
+                a.preventDefault();
+                makeGrid();
+            });
+
+            $('#pixelCanvas').on('click', 'td', function (a) {
+                b=color.val();
+                currentColor = $(this).css('background-color');
+                console.log(currentColor + "color:" + b);
+
+                if($(this).hasClass('colour')) {
+                    $(this).toggleClass('colour');
+                    $(this).css("background-color", b);
+                }
+                else {
+                    $(this).toggleClass('colour');
+                    $(this).css("background-color", "white");
+                }
+
+            });
+
+        });
+
+    });
+
+
+
